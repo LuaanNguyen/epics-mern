@@ -3,6 +3,8 @@
 # EPICS: Online Database for Study Abroad Program
 Community Partner: Vietnam Shrimp Farming team, aims to develop and implement a device that will analyze water quality to assist Vietnamese shrimp farmers.
 
+The desired outcomes of this project entail the establishment of a functional, self-updating database to facilitate communication with shrimp farmers and ensure consistent data conversion and updating. The database must support the visualization of critical parameters such as water temperature, pH, oxygen concentration, and salinity over time. 
+
 ## Website Testing
 `npm run dev`
 access the development environment at `localhost:5173`
