@@ -3,7 +3,7 @@ import "./index.css";
 function Navigation() {
   return (
     <div>
-      <nav className="flex items-center justify-between flex-wrap bg-gradient-to-r from-[#A5DD9B] from-10% via-sky-500 via-30% to-emerald-500 to-90% ...] p-6">
+      <nav className="flex items-center justify-between flex-wrap bg-[#8EAC50] p-6">
         <div className="flex items-center flex-shrink-0 text-white mr-3">
           {/* <img
             className="fill-current h-8 w-8 mr-2"
@@ -50,11 +50,16 @@ function Navigation() {
   );
 }
 
+function Background() {
+  return <div className="bg-[#222831] h-[100vh]"></div>;
+}
+
 function App() {
   return (
-    <div>
+    <>
       <Navigation />
-    </div>
+      <Background />
+    </>
   );
 }
 
