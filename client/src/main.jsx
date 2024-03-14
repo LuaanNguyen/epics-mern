@@ -6,6 +6,7 @@ import "./index.css";
 import Record from "./components/Record";
 import RecordList from "./components/RecordList";
 
+//React Router helps us to switch between pages without reloading the entire page
 const router = createBrowserRouter([
   {
     path: "/",
