@@ -31,10 +31,28 @@ router.get("/:id", async (req, res) => {
 //this section will help you create a new record
 router.post("/", async (req, res) => {
   try {
-    let newDocument = {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
+    // Extract data from the request body
+    const {
+      Time,
+      Temperature,
+      "pH Concentration ": pHConcentrationValue,
+      "O2 Concentration": O2Concentration,
+      "Salinity ": Salinity,
+    } = req.body;
+
+    // Convert the string representations of numbers to their appropriate types
+    const temperature = parseFloat(Temperature["$numberDouble"]);
+    const pHConcentration = parseFloat(pHConcentrationValue["$numberDouble"]);
+    const o2Concentration = parseFloat(O2Concentration["$numberDouble"]);
+    const salinity = parseFloat(Salinity["$numberDouble"]);
+
+    // Construct the new document
+    const newDocument = {
+      Time,
+      Temperature: temperature,
+      "pH Concentration ": pHConcentration,
+      "O2 Concentration": o2Concentration,
+      "Salinity ": salinity,
     };
     let collection = await db.collection("records");
     let result = await collection.insertOne(newDocument);
@@ -46,15 +64,20 @@ router.post("/", async (req, res) => {
 });
 
 //this sectil will update record by id
-
 router.patch("/:id", async (req, res) => {
   try {
     const query = { _id: new ObjectId(req.params.id) };
     const updates = {
       $set: {
-        name: req.body.name,
-        position: req.body.position,
-        level: req.body.level,
+        Time: req.body.Time,
+        Temperature: parseFloat(req.body.Temperature["$numberDouble"]),
+        "pH Concentration ": parseFloat(
+          req.body["pH Concentration "]["$numberDouble"]
+        ),
+        "O2 Concentration": parseFloat(
+          req.body["O2 Concentration"]["$numberDouble"]
+        ),
+        "Salinity ": parseFloat(req.body["Salinity "]["$numberDouble"]),
       },
     };
 
