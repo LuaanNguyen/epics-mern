@@ -7,8 +7,8 @@ export default function Navbar() {
         <NavLink to="/">
           <img
             alt="Logo"
-            className="h-10 inline"
-            src="https://i.imgur.com/PXwRONS.png"
+            className="h-[8rem] inline"
+            src="/organic-farm.png"
           ></img>
         </NavLink>
         <NavLink
