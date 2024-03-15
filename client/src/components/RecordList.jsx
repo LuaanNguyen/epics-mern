@@ -51,22 +51,27 @@ const Record = (props) => (
 
 export default function RecordList() {
   const [records, setRecords] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   //this method fetches the records from the database
   useEffect(() => {
     async function getRecords() {
-      const response = await fetch(`http://localhost:5050/record/`);
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        console.error(message);
-        return;
+      try {
+        const response = await fetch(`http://localhost:5050/record/`);
+        if (!response.ok) {
+          throw new Error(`An error occurred: ${response.statusText}`);
+        }
+        const records = await response.json();
+        setRecords(records);
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setLoading(false);
       }
-      const records = await response.json();
-      setRecords(records);
     }
+
     getRecords();
-    return;
-  }, [records.length]);
+  }, []);
 
   //This function will delete a second
   async function deleteRecord(id) {
@@ -79,15 +84,27 @@ export default function RecordList() {
 
   //this method will map out the records on the table
   function recordList() {
-    return records.map((record) => {
+    if (loading) {
       return (
+        <tr>
+          <td colSpan="6">Loading...</td>
+        </tr>
+      );
+    } else if (records.length === 0) {
+      return (
+        <tr>
+          <td colSpan="6">No records found</td>
+        </tr>
+      );
+    } else {
+      return records.map((record) => (
         <Record
           record={record}
           deleteRecord={() => deleteRecord(record._id)}
           key={record._id}
         />
-      );
-    });
+      ));
+    }
   }
 
   //this following section will display the table with the records of individuals

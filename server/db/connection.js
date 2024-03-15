@@ -10,15 +10,15 @@ const client = new MongoClient(uri, {
 });
 
 try {
-  //Connect the client to the server
+  // Connect the client to the server
   await client.connect();
-  //Send a ping to confirm a sucessful connection
+  // Send a ping to confirm a successful connection
   await client.db("admin").command({ ping: 1 });
-  console.log("Pinged your deployment. You sucessfully connected to MongoDB!");
+  console.log("Pinged your deployment. You successfully connected to MongoDB!");
 } catch (err) {
-  console.log(err);
+  console.error(err);
 }
 
-let db = client.db("PH levels");
+let db = client.db("employees");
 
 export default db;
