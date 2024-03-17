@@ -62,6 +62,7 @@ export default function RecordList() {
           throw new Error(`An error occurred: ${response.statusText}`);
         }
         const records = await response.json();
+
         setRecords(records);
       } catch (error) {
         console.error(error.message);
