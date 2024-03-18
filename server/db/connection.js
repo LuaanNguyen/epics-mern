@@ -19,6 +19,6 @@ try {
   console.error(err);
 }
 
-let db = client.db("employees");
+let db = client.db("ShrimpFarming");
 
 export default db;

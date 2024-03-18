@@ -43,7 +43,9 @@ const Record = (props) => (
           onClick={() => {
             props.deleteRecord(props.record._id);
           }}
-        ></button>
+        >
+          Delete
+        </button>
       </div>
     </td>
   </tr>

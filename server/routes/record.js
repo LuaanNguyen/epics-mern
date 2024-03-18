@@ -5,22 +5,17 @@ import db from "../db/connection.js";
 
 const router = express.Router();
 
-// Get all records
+// This section will help you get a list of all the records.
 router.get("/", async (req, res) => {
-  try {
-    const collection = db.collection("records");
-    const results = await collection.find({}).toArray();
-    res.status(200).send(results);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("Error retrieving records");
-  }
+  let collection = await db.collection("Database");
+  let results = await collection.find({}).toArray();
+  res.send(results).status(200);
 });
 
 // Get a single record by id
 router.get("/:id", async (req, res) => {
   try {
-    const collection = db.collection("records");
+    const collection = db.collection("Database");
     const query = { _id: new ObjectId(req.params.id) };
     const result = await collection.findOne(query);
     if (!result) res.status(404).send("Record not found");
@@ -57,7 +52,7 @@ router.post("/", async (req, res) => {
       Salinity: salinity,
     };
 
-    const collection = db.collection("records");
+    const collection = db.collection("Database");
     const result = await collection.insertOne(newDocument);
     res.status(201).send(result);
   } catch (error) {
@@ -84,7 +79,7 @@ router.patch("/:id", async (req, res) => {
       },
     };
 
-    const collection = db.collection("records");
+    const collection = db.collection("Database");
     const result = await collection.updateOne(query, updates);
     res.status(200).send(result);
   } catch (error) {
@@ -97,7 +92,7 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const query = { _id: new ObjectId(req.params.id) };
-    const collection = db.collection("records");
+    const collection = db.collection("Database");
     const result = await collection.deleteOne(query);
     res.status(200).send(result);
   } catch (error) {
